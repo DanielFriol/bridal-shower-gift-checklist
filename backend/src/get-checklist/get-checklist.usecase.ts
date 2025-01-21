@@ -1,5 +1,5 @@
+import { parseDynamoDBToGift } from '../shared/gift.model';
 import { GetChecklistRepository } from './get-checklist.repository';
-import { parseDynamoDBToGift } from './gift.model';
 
 export class GetChecklistUsecase {
     constructor(private repository: GetChecklistRepository) {}

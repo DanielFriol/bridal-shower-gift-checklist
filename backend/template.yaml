@@ -72,7 +72,7 @@ Resources:
         HelloWorld:
           Type: HttpApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /checklists/{giftId}
+            Path: /checklists/gifts/{giftId}
             Method: PATCH
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild

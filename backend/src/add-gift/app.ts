@@ -1,8 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { createAddGiftController } from './add-gift.factory';
+import { makeAddGiftController } from './add-gift.factory';
 import { createApiGatewayResponse, parseApiGatewayEvent } from '../shared/api-gateway-event-parser';
 
-const controller = createAddGiftController();
+const controller = makeAddGiftController();
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const httpRequest = parseApiGatewayEvent(event);

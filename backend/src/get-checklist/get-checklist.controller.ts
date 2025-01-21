@@ -1,5 +1,5 @@
 import { GetChecklistUsecase } from './get-checklist.usecase';
-import { HttpResponse, ResponseHelper } from '../shared/api-gateway-event-parser';
+import { HttpResponse, ResponseHelper } from '../shared/http';
 
 export class GetChecklistController {
     constructor(private usecase: GetChecklistUsecase) {}
@@ -10,6 +10,7 @@ export class GetChecklistController {
 
             return ResponseHelper.ok(checklist);
         } catch (e) {
+            console.log(e);
             if (e instanceof Error) {
                 return ResponseHelper.internalServerError({ message: e.message });
             }

@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import { AddGiftRepository } from './add-gift.repository';
-import { Gift } from './gift.model';
+import { Gift } from '../shared/gift.model';
 
 export class AddGiftUsecase {
     constructor(private repository: AddGiftRepository) {}

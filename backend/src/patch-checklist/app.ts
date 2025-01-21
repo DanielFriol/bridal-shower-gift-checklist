@@ -1,8 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { createApiGatewayResponse, parseApiGatewayEvent } from '../shared/api-gateway-event-parser';
-import { createPatchChecklistController } from './patch-checklist.factory';
+import { makePatchChecklistController } from './patch-checklist.factory';
 
-const controller = createPatchChecklistController();
+const controller = makePatchChecklistController();
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const httpRequest = parseApiGatewayEvent(event);

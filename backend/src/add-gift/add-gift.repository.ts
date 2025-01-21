@@ -1,12 +1,18 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { Gift, parseDynamoDBToGift, parseGiftToDynamoDB } from './gift.model';
+import { Gift, parseGiftToDynamoDB } from '../shared/gift.model';
 import { DynamoDBDocumentClient, PutCommand, PutCommandInput } from '@aws-sdk/lib-dynamodb';
 
 export class AddGiftRepository {
     dynamoDb: DynamoDBDocumentClient;
 
     constructor() {
-        const client = new DynamoDBClient();
+        const client = new DynamoDBClient(
+            process.env.ENVIRONMENT !== 'local'
+                ? {}
+                : {
+                      endpoint: 'http://localhost:8000',
+                  },
+        );
         this.dynamoDb = DynamoDBDocumentClient.from(client);
     }
 
@@ -16,8 +22,9 @@ export class AddGiftRepository {
             TableName: process.env.DYNAMODB_TABLE_NAME,
             Item: parseGiftToDynamoDB(gift), // Using standard JavaScript object
         };
-        const response = await this.dynamoDb.send(new PutCommand(input));
 
-        return parseDynamoDBToGift(response?.Attributes?.Item[0]);
+        await this.dynamoDb.send(new PutCommand(input));
+
+        return gift;
     }
 }
