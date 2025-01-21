@@ -19,7 +19,6 @@ export class GetChecklistRepository {
     }
 
     async getAllGifts() {
-        console.log(process.env.DYNAMODB_TABLE_NAME);
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
         };

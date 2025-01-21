@@ -10,7 +10,6 @@ export class GetChecklistController {
 
             return ResponseHelper.ok(checklist);
         } catch (e) {
-            console.log(e);
             if (e instanceof Error) {
                 return ResponseHelper.internalServerError({ message: e.message });
             }

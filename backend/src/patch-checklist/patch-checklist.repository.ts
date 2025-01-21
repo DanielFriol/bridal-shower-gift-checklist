@@ -16,7 +16,7 @@ export class PatchChecklistRepository {
         this.dynamoDb = DynamoDBDocumentClient.from(client);
     }
     async handle(giftId: string, person?: string): Promise<Gift> {
-        // Patch checklist in DynamoDB
+        // Define the update expression
         let updateExpression = 'SET #reserved = :reserved, #reservedAt = :reservedAt';
         const expressionAttributeNames: { [key: string]: string } = {
             '#reserved': 'reserved',
@@ -42,7 +42,7 @@ export class PatchChecklistRepository {
             UpdateExpression: updateExpression,
             ExpressionAttributeNames: expressionAttributeNames,
             ExpressionAttributeValues: expressionAttributeValues,
-            ReturnValues: 'UPDATED_OLD',
+            ReturnValues: 'ALL_NEW', // Use 'ALL_NEW' to get all attributes after update
         };
 
         const response = await this.dynamoDb.send(new UpdateCommand(input));

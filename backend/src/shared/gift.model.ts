@@ -11,7 +11,7 @@ export interface Gift {
 export function parseGiftToDynamoDB(gift: Gift) {
     return {
         PK: `GIFT#${gift.id}`,
-        SK: `GIFT#$METADATA`,
+        SK: `GIFT#METADATA`,
         id: gift.id,
         title: gift.title,
         reserved: gift.reserved,
